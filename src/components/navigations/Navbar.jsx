@@ -114,12 +114,16 @@ const Navbar = ({
               <span className="sr-only">Workflow</span>
               <img
                 className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-yellow-700.svg"
+                src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg"
                 alt=""
               />
             </a>
           </div>
-          <div className="-mr-2 -my-2 md:hidden">
+          <div className="-mr-2 -my-2 flex md:hidden ">
+            <Link to="/cart">
+              <ShoppingCartIcon className="h-8 w-8 cursor-pointer text-gray-500 font-light mt-1 mr-3" />
+              <span className="text-xs absolute top-3 mt-3 ml-4 bg-red-500 text-white font-semibold rounded-full px-1 text-center">{total_items}</span>
+            </Link>
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-600">
               <span className="sr-only">Open menu</span>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
@@ -127,6 +131,12 @@ const Navbar = ({
           </div>
           <div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
             <Popover.Group as="nav" className="flex space-x-10">
+              <Link to="/" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Home
+              </Link>
+              <Link to="/shop" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Shop
+              </Link>
               <Popover>
                 {({ open }) => (
                   <>
@@ -202,15 +212,10 @@ const Navbar = ({
                   </>
                 )}
               </Popover>
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Pricing
-              </a>
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Docs
-              </a>
               <Popover>
                 {({ open }) => (
                   <>
+
                     <Popover.Button
                       className={classNames(
                         open ? 'text-gray-900' : 'text-gray-500',
@@ -313,8 +318,8 @@ const Navbar = ({
             </Popover.Group>
             <div className="flex items-center md:ml-12">
               <Link to="/cart">
-                <ShoppingCartIcon className="h-8 w-8 cursor-pointer text-white mt-1 mr-6" />
-                <span className="text-xs absolute top-3 mt-3 ml-4 bg-red-500 text-white font-semibold rounded-full px-2 text-center">{total_items}</span>
+                <ShoppingCartIcon className="h-8 w-8 cursor-pointer text-gray-500 font-light mt-1 mr-6" />
+                <span className="text-xs absolute top-3 mt-3 ml-4 bg-red-500 text-white rounded-full px-1.5 text-center">{total_items}</span>
               </Link>
               {
                 isAuthenticated ? <AuthLinks logoutHandler={logoutHandler} /> : guestLinks
@@ -323,6 +328,7 @@ const Navbar = ({
           </div>
         </div>
       </div>
+
 
       <Transition
         as={Fragment}
@@ -333,12 +339,15 @@ const Navbar = ({
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
+
         <Popover.Panel
           focus
           className="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
         >
+
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5 sm:pb-8">
+
               <div className="flex items-center justify-between">
                 <div>
                   <img
@@ -381,9 +390,9 @@ const Navbar = ({
             </div>
             <div className="py-6 px-5">
               <div className="grid grid-cols-2 gap-4">
-                <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700">
-                  Pricing
-                </a>
+                <Link to="/shop" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700">
+                  Shop
+                </Link>
 
                 <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700">
                   Docs
@@ -434,6 +443,7 @@ const Navbar = ({
           </div>
         </Popover.Panel>
       </Transition>
+
     </Popover>
 
   )
@@ -441,6 +451,7 @@ const Navbar = ({
 
 const mapStateToProps = state => ({
   isAuthenticated: state.Auth.isAuthenticated,
+  total_items: state.Cart.total_items
 })
 
 export default connect(mapStateToProps, {

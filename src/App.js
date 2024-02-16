@@ -9,6 +9,9 @@ import Login from './pages/auth/Login';
 import Activate from './pages/auth/Activate';
 import ResetPassword from './pages/auth/ResetPassword';
 import ResetPasswordConfirm from './pages/auth/ResetPasswordConfirm';
+import Shop from './pages/Shop';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
 
 
 function App() {
@@ -27,6 +30,9 @@ function App() {
           <Route path='/activate/:uid/:token' element={<Activate />} />
           <Route path='/resetpassword' element={<ResetPassword />} />
           <Route path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
+          <Route path='/shop' element={<Shop />}/>
+          <Route exact path='/shop/:productId' element={<ProductDetail />}/>
+          <Route path='/cart' element={<Cart/>}/>
         </Routes>
       </Router>
       <Toaster
